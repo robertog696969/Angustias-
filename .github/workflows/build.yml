@@ -1,0 +1,19 @@
+name: Compilar APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Construir con Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          buildozer_version: stable
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Subir APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-apk
+          path: bin/*.apk
+          
