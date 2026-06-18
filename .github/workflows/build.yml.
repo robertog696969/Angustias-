@@ -1,0 +1,17 @@
+name: Construir APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Construir app
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          buildozer_version: stable
+      - name: Guardar archivo
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-terminada
+          path: bin/*.apk
+  
